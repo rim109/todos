@@ -1,10 +1,11 @@
 package com.example.todo.domain.todos.model
 
+import com.example.todo.domain.todos.dto.TodosResponse
 import jakarta.persistence.*
-import java.sql.Date
+import java.util.*
 
 @Entity
-@Table(name = "TODOS")
+@Table(name = "todos")
 class Todos(
 
     @Column(name = "title")
@@ -13,13 +14,22 @@ class Todos(
     @Column(name = "description")
     var description: String? = null,
 
-    @Column(name = "day")
-    var days: Date,
-
     @Column(name = "nickname")
-    var nickname: String
+    var nickname: String,
+
+    @Column(name = "day")
+    val day: Date
 ){
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
+}
+fun Todos.toResponse(): TodosResponse {
+    return TodosResponse(
+        id = id!!,
+        title = title,
+        description = description,
+        day = day,
+        nickname = nickname
+    )
 }

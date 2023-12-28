@@ -8,12 +8,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 
-
 @Configuration
 class SwaggerConfigs {
 
     @Bean
-    fun openAPI() : OpenAPI = OpenAPI()
+    fun openAPI(): OpenAPI = OpenAPI()
         .components(Components())
         .info(
             Info()

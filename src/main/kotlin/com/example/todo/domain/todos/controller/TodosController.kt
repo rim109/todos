@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/todos")
 @RestController
-class TodosController (
+class TodosController(
     private val todosService: TodosService
-){
+) {
 
     @GetMapping
     fun getTodosList(): ResponseEntity<List<TodosResponse>> {
@@ -22,28 +22,28 @@ class TodosController (
     }
 
     @GetMapping("/{todoId}")
-    fun getTodo(@PathVariable todoId: Long): ResponseEntity<TodosResponse>{
+    fun getTodo(@PathVariable todoId: Long): ResponseEntity<TodosResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(todosService.getTodo(todoId))
     }
 
     @PostMapping
-    fun createTodo(@RequestBody createTodosRequest: CreateTodosRequest): ResponseEntity<TodosResponse>{
+    fun createTodo(@RequestBody createTodosRequest: CreateTodosRequest): ResponseEntity<TodosResponse> {
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(todosService.createTodo(createTodosRequest))
     }
 
     @PutMapping("/{todoId}")
-    fun updateTodos(@PathVariable todoId: Long, updateTodosRequest: UpdateTodosRequest):ResponseEntity<TodosResponse>{
+    fun updateTodos(@PathVariable todoId: Long, updateTodosRequest: UpdateTodosRequest): ResponseEntity<TodosResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body((todosService.updateTodo(todoId,updateTodosRequest)))
+            .body((todosService.updateTodo(todoId, updateTodosRequest)))
     }
 
     @DeleteMapping("/{todoId}")
-    fun deleteTodos(@PathVariable todoId: Long): ResponseEntity<Unit>{
+    fun deleteTodos(@PathVariable todoId: Long): ResponseEntity<Unit> {
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()
