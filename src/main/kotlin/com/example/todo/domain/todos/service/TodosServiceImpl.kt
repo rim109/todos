@@ -7,16 +7,18 @@ import com.example.todo.domain.todos.dto.UpdateTodosRequest
 import com.example.todo.domain.todos.model.Todos
 import com.example.todo.domain.todos.model.toResponse
 import com.example.todo.domain.todos.repository.TodoRepository
+import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 class TodosServiceImpl(
     private val todoRepository: TodoRepository,
 ) : TodosService {
     override fun getTodosList(): List<TodosResponse> {
-        return todoRepository.findAll().map { it.toResponse() }
+        return todoRepository.findAll(Sort.by(Sort.Direction.DESC,"day")).map { it.toResponse() }
     }
 
     override fun getTodo(todosId: Long): TodosResponse {
@@ -46,6 +48,7 @@ class TodosServiceImpl(
         todos.description = request.description
 
         return todoRepository.save(todos).toResponse()
+//        return TodosResponse(1,"","", Date(),"" )
     }
 
     @Transactional

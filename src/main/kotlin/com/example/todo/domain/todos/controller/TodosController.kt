@@ -46,6 +46,6 @@ class TodosController(
     fun deleteTodos(@PathVariable todoId: Long): ResponseEntity<Unit> {
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
-            .build()
+            .body((todosService.deleteTodo(todoId)))
     }
 }
