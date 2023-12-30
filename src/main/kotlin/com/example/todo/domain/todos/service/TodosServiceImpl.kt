@@ -1,5 +1,6 @@
 package com.example.todo.domain.todos.service
 
+import com.example.todo.domain.exception.IllegalStateException
 import com.example.todo.domain.exception.ModelNotFoundException
 import com.example.todo.domain.todos.dto.CreateTodosRequest
 import com.example.todo.domain.todos.dto.TodosResponse
@@ -40,7 +41,7 @@ class TodosServiceImpl(
 
     @Transactional
     override fun updateTodo(todosId: Long, request: UpdateTodosRequest): TodosResponse {
-        val todos = todoRepository.findByIdOrNull(todosId) ?: throw ModelNotFoundException("Todos", todosId)
+        val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
 
 //        val (title, description, nickname) = request
         todos.nickname = request.nickname
@@ -53,7 +54,7 @@ class TodosServiceImpl(
 
     @Transactional
     override fun deleteTodo(todosId: Long) {
-        val todos = todoRepository.findByIdOrNull(todosId) ?: throw ModelNotFoundException("Todos", todosId)
+        val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
         todoRepository.delete(todos)
     }
 }

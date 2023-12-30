@@ -19,7 +19,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(IllegalStateException::class)
     fun handlerIllegalStateException(e: IllegalStateException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
-            .status(HttpStatus.CONFLICT)
+            .status(HttpStatus.BAD_REQUEST)
             .body(ErrorResponse(e.message))
     }
 }
