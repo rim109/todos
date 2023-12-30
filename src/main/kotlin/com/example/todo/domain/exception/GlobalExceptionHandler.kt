@@ -12,7 +12,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(ModelNotFoundException::class)
     fun handlerModelNotFoundException(e: ModelNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
-            .status(HttpStatus.NO_CONTENT)
+            .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(e.message))
     }
 
