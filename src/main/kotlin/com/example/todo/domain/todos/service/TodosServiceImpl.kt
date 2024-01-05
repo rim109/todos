@@ -12,7 +12,6 @@ import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.*
 
 @Service
 class TodosServiceImpl(
@@ -56,5 +55,11 @@ class TodosServiceImpl(
     override fun deleteTodo(todosId: Long) {
         val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
         todoRepository.delete(todos)
+    }
+
+    override fun isCompleteStatus(todosId: Long) {
+        val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
+        todos.complete = !todos.complete
+        todoRepository.save(todos)
     }
 }

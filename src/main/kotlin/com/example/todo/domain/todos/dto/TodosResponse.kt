@@ -7,5 +7,6 @@ data class TodosResponse(
     val title: String,
     val description: String?,
     val day: Date,
-    val nickname: String
+    val nickname: String,
+    val complete: Boolean
 )

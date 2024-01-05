@@ -1,8 +1,6 @@
 package com.example.todo.domain.todos.controller
 
-import com.example.todo.domain.todos.dto.CreateTodosRequest
-import com.example.todo.domain.todos.dto.TodosResponse
-import com.example.todo.domain.todos.dto.UpdateTodosRequest
+import com.example.todo.domain.todos.dto.*
 import com.example.todo.domain.todos.service.TodosService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -39,8 +37,14 @@ class TodosController(
     fun updateTodos(@PathVariable todoId: Long, updateTodosRequest: UpdateTodosRequest): ResponseEntity<TodosResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body((todosService.updateTodo(todoId, updateTodosRequest)))
+            .body(todosService.updateTodo(todoId, updateTodosRequest))
     }
+
+    @PatchMapping("/{todoId}")
+    fun completeStatus(@PathVariable todoId: Long): ResponseEntity<Unit> {
+        return ResponseEntity.status(HttpStatus.OK).body(todosService.isCompleteStatus(todoId))
+    }
+
 
     @DeleteMapping("/{todoId}")
     fun deleteTodos(@PathVariable todoId: Long): ResponseEntity<Unit> {

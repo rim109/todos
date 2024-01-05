@@ -15,4 +15,8 @@ interface TodosService {
     fun updateTodo(todosId: Long, request: UpdateTodosRequest): TodosResponse
 
     fun deleteTodo(todosId: Long)
+
+    fun isCompleteStatus(todosId: Long)
+
+
 }
