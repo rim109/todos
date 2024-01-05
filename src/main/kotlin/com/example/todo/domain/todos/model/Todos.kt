@@ -2,6 +2,7 @@ package com.example.todo.domain.todos.model
 
 import com.example.todo.domain.comments.model.Comments
 import com.example.todo.domain.todos.dto.TodosResponse
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import java.util.*
 
@@ -23,7 +24,11 @@ class Todos(
 
     @Column(name = "complete")
     var complete: Boolean = false,
+//
+//    @Transient
+//    val commentList: List<Comments>,
 
+    @JsonIgnore
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val comment: MutableList<Comments> = mutableListOf()
 
@@ -47,6 +52,7 @@ fun Todos.toResponse(): TodosResponse {
         description = description,
         day = day,
         nickname = nickname,
-        complete = complete
+        complete = complete,
+        commentList = comment
     )
 }

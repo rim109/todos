@@ -1,12 +1,14 @@
 package com.example.todo.domain.todos.dto
 
+import com.example.todo.domain.comments.model.Comments
 import java.util.Date
 
 data class TodosResponse(
     val id: Long,
-    val title: String,
-    val description: String?,
+    var title: String,
+    var description: String?,
     val day: Date,
-    val nickname: String,
-    val complete: Boolean
+    var nickname: String,
+    var complete: Boolean,
+    var commentList: List<Comments>
 )

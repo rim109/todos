@@ -21,8 +21,10 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class CommentsServiceImpl(
     private val todoRepository: TodoRepository,
-    private val CommentsRepository: CommentsRepository,
+    private val commentsRepository: CommentsRepository
 ) : CommentsService {
+
+    // comment 생성
     @Transactional
     override fun createComments(todosId:Long, request: CreateCommentsRequest): CommentsResponse {
         val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
@@ -30,43 +32,44 @@ class CommentsServiceImpl(
         val comment = Comments(
             nickname = request.nickname,
             password = request.password,
-            comment = request.comment,
+            commented = request.commented,
             todo = todos
         )
         todos.addComments(comment)
-        CommentsRepository.save(comment)
+        commentsRepository.save(comment)
         return comment.toResponse()
     }
 
+    //comment 수정
     @Transactional
     override fun updateComments(todosId:Long, commentsId: Long, request: UpdateCommentsRequest): CommentsResponse {
         val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
         val comment =
-            CommentsRepository.findByIdOrNull(commentsId) ?: throw IllegalStateException("Comments", commentsId)
+            commentsRepository.findByIdOrNull(commentsId) ?: throw IllegalStateException("Comments", commentsId)
 
         if (comment.password != request.password)
             throw WrongPasswordException("Comments", commentsId)
         else {
-            todos.comment.remove(comment)
             comment.nickname = request.nickname
-            comment.comment = request.comment
-            CommentsRepository.save(comment)
+            comment.commented = request.commented
+            commentsRepository.save(comment)
         }
 
-        return CommentsRepository.save(comment).toResponse()
+        return commentsRepository.save(comment).toResponse()
     }
 
+    //comment 삭제
     @Transactional
     override fun deleteComments(todosId:Long, commentsId: Long, request: DeleteCommentsRequest){
         val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
         val comment =
-            CommentsRepository.findByIdOrNull(commentsId) ?: throw IllegalStateException("Comments", commentsId)
+            commentsRepository.findByIdOrNull(commentsId) ?: throw IllegalStateException("Comments", commentsId)
 
         if (comment.password != request.password)
             throw WrongPasswordException("Comments", commentsId)
         else {
             todos.removeComments(comment)
-            CommentsRepository.save(comment)
+            commentsRepository.save(comment)
         }
     }
 

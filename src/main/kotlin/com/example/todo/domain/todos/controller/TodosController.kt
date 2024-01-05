@@ -20,7 +20,7 @@ class TodosController(
     }
 
     @GetMapping("/{todoId}")
-    fun getTodo(@PathVariable todoId: Long): ResponseEntity<TodosResponse> {
+    fun getTodo(@PathVariable todoId: Long) : ResponseEntity<TodosResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(todosService.getTodo(todoId))

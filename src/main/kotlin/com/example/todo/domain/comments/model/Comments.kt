@@ -12,14 +12,14 @@ class Comments(
     @Column(name = "nickname")
     var nickname: String,
 
-    @Column(name = "comment")
-    var comment: String? = null,
+    @Column(name = "commented")
+    var commented: String? = null,
 
     @Column(name = "password")
     var password: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "todos_id")
+    @JoinColumn(name = "todo_id")
     val todo: Todos
 
 ) {
@@ -32,6 +32,6 @@ fun Comments.toResponse(): CommentsResponse {
     return CommentsResponse(
         id = id!!,
         nickname = nickname,
-        comment= comment
+        commented= commented
     )
 }
