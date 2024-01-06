@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/comments/{todosId}")
 @RestController
 class CommentsController(
-    private val commentsService: CommentsService
+    private val commentsService: CommentsService,
 ) {
 
     @PostMapping

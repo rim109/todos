@@ -1,7 +1,6 @@
 package com.example.todo.domain.comments.service
 
 import com.example.todo.domain.exception.IllegalStateException
-import com.example.todo.domain.exception.ModelNotFoundException
 import com.example.todo.domain.comments.dto.CreateCommentsRequest
 import com.example.todo.domain.comments.dto.CommentsResponse
 import com.example.todo.domain.comments.dto.DeleteCommentsRequest
@@ -10,11 +9,8 @@ import com.example.todo.domain.comments.model.Comments
 import com.example.todo.domain.comments.model.toResponse
 import com.example.todo.domain.comments.repository.CommentsRepository
 import com.example.todo.domain.exception.WrongPasswordException
-import com.example.todo.domain.todos.model.Todos
 import com.example.todo.domain.todos.repository.TodoRepository
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -43,7 +39,6 @@ class CommentsServiceImpl(
     //comment 수정
     @Transactional
     override fun updateComments(todosId:Long, commentsId: Long, request: UpdateCommentsRequest): CommentsResponse {
-        val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
         val comment =
             commentsRepository.findByIdOrNull(commentsId) ?: throw IllegalStateException("Comments", commentsId)
 

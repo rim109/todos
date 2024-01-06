@@ -1,5 +1,6 @@
 package com.example.todo.domain.todos.dto
 
+import com.example.todo.domain.comments.dto.CommentsResponse
 import com.example.todo.domain.comments.model.Comments
 import java.util.Date
 
@@ -10,5 +11,5 @@ data class TodosResponse(
     val day: Date,
     var nickname: String,
     var complete: Boolean,
-    var commentList: List<Comments>
+    var comments: List<CommentsResponse>
 )
