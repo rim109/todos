@@ -31,7 +31,7 @@ class CommentsController(
     ): ResponseEntity<CommentsResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body((commentsService.updateComments(todosId, commentsId, updateCommentsRequest)))
+            .body(commentsService.updateComments(todosId, commentsId, updateCommentsRequest))
     }
 
     @DeleteMapping("/{commentsId}")
