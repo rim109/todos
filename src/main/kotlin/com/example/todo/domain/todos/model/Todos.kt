@@ -1,5 +1,6 @@
 package com.example.todo.domain.todos.model
 
+import com.example.todo.common.model.BaseTime
 import com.example.todo.domain.comments.model.Comments
 import com.example.todo.domain.comments.model.toResponse
 import com.example.todo.domain.todos.dto.TodosResponse
@@ -30,15 +31,16 @@ class Todos(
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val comment: MutableList<Comments> = mutableListOf()
 
-){
+) : BaseTime() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    fun addComments(comments: Comments){
+    fun addComments(comments: Comments) {
         comment.add(comments)
     }
-    fun removeComments(comments: Comments){
+
+    fun removeComments(comments: Comments) {
         comment.remove(comments)
     }
 }
@@ -51,6 +53,8 @@ fun Todos.toResponse(): TodosResponse {
         day = day,
         nickname = nickname,
         complete = complete,
-        comments = comment.map { it.toResponse() }
+        comments = comment.map { it.toResponse() },
+        createdAt = this.createdAt,
+        updatedAt = this.updatedAt
     )
 }

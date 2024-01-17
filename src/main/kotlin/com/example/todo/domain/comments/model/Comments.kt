@@ -1,5 +1,6 @@
 package com.example.todo.domain.comments.model
 
+import com.example.todo.common.model.BaseTime
 import com.example.todo.domain.comments.dto.CommentsResponse
 import com.example.todo.domain.todos.model.Todos
 import jakarta.persistence.*
@@ -22,7 +23,7 @@ class Comments(
     @JoinColumn(name = "todo_id")
     val todo: Todos
 
-) {
+) : BaseTime() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
@@ -32,6 +33,8 @@ fun Comments.toResponse(): CommentsResponse {
     return CommentsResponse(
         id = id!!,
         nickname = nickname,
-        commented= commented
+        commented = commented,
+        createdAt = this.createdAt,
+        updatedAt = this.updatedAt
     )
 }
