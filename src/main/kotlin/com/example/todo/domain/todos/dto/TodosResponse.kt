@@ -6,9 +6,9 @@ import java.util.Date
 
 data class TodosResponse(
     val id: Long,
+    val userId: Long,
     var title: String,
     var description: String?,
-    val day: Date,
     var nickname: String,
     var complete: Boolean,
     val createdAt: LocalDateTime,
