@@ -12,7 +12,6 @@ class Users(
     email: String,
     password: String,
     nickname: String,
-    role: UserRole
 ) : BaseTime() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +26,6 @@ class Users(
     @Column(nullable = false, length = 10)
     var nickname = nickname
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    val role = role
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     val userRole: List<UserRoleEntity>? = null
 }
@@ -42,6 +37,5 @@ fun Users.toResponse(): UserResponse {
         nickname = nickname,
         createdAt = this.createdAt,
         updatedAt = this.updatedAt,
-        role = role.name
     )
 }
