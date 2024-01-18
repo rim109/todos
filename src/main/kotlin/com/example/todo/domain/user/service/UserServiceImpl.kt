@@ -31,7 +31,11 @@ class UserServiceImpl(
                 email = request.email,
                 // TODO: 비밀번호 암호화
                 password = passwordEncoder.encode(request.password),
-                nickname = request.nickname
+                nickname = request.nickname,
+                role = when (request.role) {
+                    UserRole.MEMBER.name -> UserRole.MEMBER
+                    else -> throw IllegalArgumentException("Invalid role")
+                }
             )
         ).toResponse()
     }
@@ -41,13 +45,14 @@ class UserServiceImpl(
     override fun login(request: LoginRequest): LoginResponse {
         val user = userRepository.findByEmail(request.email) ?: throw ModelNotFoundException("User", null)
 
-        if (!passwordEncoder.matches(request.password, user.password)) {
+        if (user.role.name != request.role || !passwordEncoder.matches(request.password, user.password)) {
             throw InvalidCredentialException()
         }
         return LoginResponse(
             accessToken = jwtPlugin.generateAccessToken(
                 subject = user.id.toString(),
-                email = user.email
+                email = user.email,
+                role = user.role.name
 
             )
         )
