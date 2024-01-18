@@ -1,11 +1,10 @@
 package com.example.todo.domain.user.service
 
-import com.example.todo.common.auth.TokenInfo
 import com.example.todo.domain.user.dto.*
 
 interface UserService {
 
-    fun signup(signupRequest: SignupRequest): String
+    fun signup(signupRequest: SignupRequest): UserResponse
 
-    fun login(loginRequest: LoginRequest): TokenInfo
+    fun login(loginRequest: LoginRequest): LoginResponse
 }

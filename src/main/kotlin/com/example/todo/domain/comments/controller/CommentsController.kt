@@ -1,6 +1,5 @@
 package com.example.todo.domain.comments.controller
 
-import com.example.todo.common.dto.CustomUser
 import com.example.todo.domain.comments.dto.CommentsResponse
 import com.example.todo.domain.comments.dto.CreateCommentsRequest
 import com.example.todo.domain.comments.dto.DeleteCommentsRequest
@@ -20,37 +19,31 @@ class CommentsController(
 
     @PostMapping
     fun createComments(
-        @AuthenticationPrincipal user: CustomUser,
         @PathVariable todosId:Long,
         @RequestBody createCommentsRequest: CreateCommentsRequest
     ): ResponseEntity<CommentsResponse> {
-        val userId = user.id
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(commentsService.createComments(todosId,createCommentsRequest, userId))
+            .body(commentsService.createComments(todosId,createCommentsRequest))
     }
 
     @PutMapping("/{commentsId}")
     fun updateComments(
-        @AuthenticationPrincipal user: CustomUser,
         @PathVariable todosId:Long,
         @PathVariable commentsId: Long,
         updateCommentsRequest: UpdateCommentsRequest
     ): ResponseEntity<CommentsResponse> {
-        val userId = user.id
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(commentsService.updateComments(todosId, commentsId, updateCommentsRequest, userId))
+            .body(commentsService.updateComments(todosId, commentsId, updateCommentsRequest))
     }
 
     @DeleteMapping("/{commentsId}")
     fun deleteComments(
-        @AuthenticationPrincipal user: CustomUser,
         @PathVariable todosId:Long,
         @PathVariable commentsId: Long, deleteCommentsRequest: DeleteCommentsRequest
     ): ResponseEntity<Unit> {
-        val userId = user.id
-        commentsService.deleteComments(todosId, commentsId, deleteCommentsRequest, userId)
+        commentsService.deleteComments(todosId, commentsId, deleteCommentsRequest)
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()

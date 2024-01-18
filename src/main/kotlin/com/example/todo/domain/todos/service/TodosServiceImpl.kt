@@ -41,8 +41,8 @@ class TodosServiceImpl(
     }
 
     // todo 생성
-    override fun createTodo(request: CreateTodosRequest, userId: Long): TodosResponse {
-        val user= userRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("User", userId)
+    override fun createTodo(request: CreateTodosRequest): TodosResponse {
+//        val user= userRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("User", userId)
 //        if (user != null) {
 //            throw InvalidInputException("email", "이미 등록된 email 입니다.")
 //        }
@@ -51,7 +51,7 @@ class TodosServiceImpl(
                 nickname = request.nickname,
                 title = request.title,
                 description = request.description,
-                user = user
+
             )
         )
         return createTodo.toResponse()
@@ -59,7 +59,7 @@ class TodosServiceImpl(
 
     //todo 수정
     @Transactional
-    override fun updateTodo(todosId: Long, userId: Long, request: UpdateTodosRequest): TodosResponse {
+    override fun updateTodo(todosId: Long, request: UpdateTodosRequest): TodosResponse {
         val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
 
 //        val (title, description, nickname) = request
@@ -73,7 +73,7 @@ class TodosServiceImpl(
 
     //todo 삭제
     @Transactional
-    override fun deleteTodo(todosId: Long, userId: Long) {
+    override fun deleteTodo(todosId: Long) {
         val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
         todoRepository.delete(todos)
     }

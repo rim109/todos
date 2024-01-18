@@ -20,6 +20,7 @@ data class LoginRequest(
     )
     @JsonProperty("password")
     private val _password: String?,
+    val role: String
 ){
     val email: String
         get() = _email!!

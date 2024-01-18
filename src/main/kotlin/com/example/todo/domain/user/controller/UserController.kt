@@ -1,10 +1,10 @@
 package com.example.todo.domain.user.controller
 
-import com.example.todo.common.dto.BaseResponse
-import com.example.todo.common.auth.TokenInfo
 import com.example.todo.domain.user.dto.*
 import com.example.todo.domain.user.service.UserService
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -16,16 +16,19 @@ class UserController(
     private val userService: UserService
 ) {
 
-    @PostMapping("/signup")
-    fun signup(@RequestBody @Valid signupRequest: SignupRequest): BaseResponse<Unit> {
-        val resultMsg: String = userService.signup(signupRequest)
-        return BaseResponse(message = resultMsg)
+    @PostMapping("/login")
+    fun signIn(@RequestBody loginRequest: LoginRequest): ResponseEntity<LoginResponse> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(userService.login(loginRequest))
+
     }
 
-    @PostMapping("/login")
-    fun login(@RequestBody @Valid loginRequest: LoginRequest): BaseResponse<TokenInfo> {
-        val tokenInfo = userService.login(loginRequest)
-        return BaseResponse(data = tokenInfo)
+    @PostMapping("/signup")
+    fun signup(@RequestBody signUpRequest: SignupRequest): ResponseEntity<UserResponse> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(userService.signup(signUpRequest))
     }
 
 }

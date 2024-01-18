@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface UserRepository: JpaRepository<Users,Long> {
     fun findByEmail(email: String): Users?
 
-//    fun existsByEmail(email: String): Boolean
+    fun existsByEmail(email: String): Boolean
 }
 
 interface UserRoleRepository : JpaRepository<UserRoleEntity, Long> {

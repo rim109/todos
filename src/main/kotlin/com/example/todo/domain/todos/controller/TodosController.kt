@@ -1,9 +1,7 @@
 package com.example.todo.domain.todos.controller
 
-import com.example.todo.common.dto.CustomUser
 import com.example.todo.domain.todos.dto.*
 import com.example.todo.domain.todos.service.TodosService
-import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
@@ -31,11 +29,9 @@ class TodosController(
 
     @PostMapping
     fun createTodo(
-        @AuthenticationPrincipal user: CustomUser,
         @RequestBody createTodosRequest: CreateTodosRequest
     ): ResponseEntity<TodosResponse> {
-        val userId = user.id
-        val todosResponse = todosService.createTodo(createTodosRequest, userId)
+        val todosResponse = todosService.createTodo(createTodosRequest)
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(todosResponse)
@@ -43,13 +39,11 @@ class TodosController(
 
     @PutMapping("/{todoId}")
     fun updateTodos(
-        @AuthenticationPrincipal user: CustomUser,
         @PathVariable todoId: Long, updateTodosRequest: UpdateTodosRequest
     ): ResponseEntity<TodosResponse> {
-        val userId = user.id
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(todosService.updateTodo(todoId,userId,updateTodosRequest))
+            .body(todosService.updateTodo(todoId,updateTodosRequest))
     }
 
     @PatchMapping("/{todoId}")
@@ -60,11 +54,9 @@ class TodosController(
 
     @DeleteMapping("/{todoId}")
     fun deleteTodos(
-        @AuthenticationPrincipal user: CustomUser,
         @PathVariable todoId: Long
     ): ResponseEntity<Unit> {
-        val userId = user.id
-        todosService.deleteTodo(todoId,userId)
+        todosService.deleteTodo(todoId)
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()

@@ -26,16 +26,15 @@ class CommentsServiceImpl(
 
     // comment 생성
     @Transactional
-    override fun createComments(todosId:Long, request: CreateCommentsRequest, userId: Long): CommentsResponse {
+    override fun createComments(todosId:Long, request: CreateCommentsRequest): CommentsResponse {
         val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
-        val user: Users = userRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("User", userId)
+
 
         val comment = Comments(
             nickname = request.nickname,
             password = request.password,
             commented = request.commented,
             todo = todos,
-            user = user
         )
         todos.addComments(comment)
         commentsRepository.save(comment)
@@ -44,7 +43,7 @@ class CommentsServiceImpl(
 
     //comment 수정
     @Transactional
-    override fun updateComments(todosId:Long, commentsId: Long, request: UpdateCommentsRequest, userId: Long): CommentsResponse {
+    override fun updateComments(todosId:Long, commentsId: Long, request: UpdateCommentsRequest): CommentsResponse {
         val comment =
             commentsRepository.findByIdOrNull(commentsId) ?: throw IllegalStateException("Comments", commentsId)
 
@@ -61,7 +60,7 @@ class CommentsServiceImpl(
 
     //comment 삭제
     @Transactional
-    override fun deleteComments(todosId:Long, commentsId: Long, request: DeleteCommentsRequest, userId: Long){
+    override fun deleteComments(todosId:Long, commentsId: Long, request: DeleteCommentsRequest){
         val todos = todoRepository.findByIdOrNull(todosId) ?: throw IllegalStateException("Todos", todosId)
         val comment =
             commentsRepository.findByIdOrNull(commentsId) ?: throw IllegalStateException("Comments", commentsId)

@@ -20,7 +20,8 @@ data class SignupRequest(
     )
     @JsonProperty("password")
     private val _password: String?,
-    val nickname: String
+    val nickname: String,
+    val role: String
 ){
     val email: String
         get() = _email!!

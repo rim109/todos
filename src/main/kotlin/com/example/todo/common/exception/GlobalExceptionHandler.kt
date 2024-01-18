@@ -23,6 +23,13 @@ class GlobalExceptionHandler {
             .body(ErrorResponse(message = e.message))
     }
 
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handlerIllegalArgumentException(e: IllegalArgumentException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(ErrorResponse(message = e.message))
+    }
+
     @ExceptionHandler(WrongPasswordException::class)
     fun handlerWrongPasswordException(e: WrongPasswordException): ResponseEntity<ErrorResponse> {
         return ResponseEntity

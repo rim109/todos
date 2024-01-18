@@ -10,11 +10,11 @@ interface TodosService {
 
     fun getTodo(todosId: Long): TodosResponse
 
-    fun createTodo(request: CreateTodosRequest, userId: Long): TodosResponse
+    fun createTodo(request: CreateTodosRequest): TodosResponse
 
-    fun updateTodo(todosId: Long, userId: Long, request: UpdateTodosRequest): TodosResponse
+    fun updateTodo(todosId: Long, request: UpdateTodosRequest): TodosResponse
 
-    fun deleteTodo(todosId: Long, userId: Long)
+    fun deleteTodo(todosId: Long)
 
     fun isCompleteStatus(todosId: Long)
 

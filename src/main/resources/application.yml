@@ -15,6 +15,11 @@
 #        orm:
 #          jdbc:
 #            bind: trace
+#auth:
+#    jwt:
+#        issuer: team.sparta.com
+#        secret: PO4c8z41Hia5gJG3oeuFJMRYBB4Ws4aZ
+#        accessTokenExpirationHour: 168
 
 server:
     port: 8080
@@ -28,7 +33,7 @@ spring:
     jpa:
         open-in-view: true
         hibernate:
-            ddl-auto: none
+            ddl-auto: create
         properties:
             hibernate:
                 show_sql: false
@@ -44,6 +49,10 @@ logging:
             SQL: debug
             type.descriptor.sql: trace
 
-jwt:
-    secret: DadFufN4Oui8Bfv3ScFj6R9fyJ9hD45E6AGFsXgFsRhT4YSdSb
+auth:
+    jwt:
+        issuer: team.sparta.com
+        secret: PO4c8z41Hia5gJG3oeuFJMRYBB4Ws4aZ
+        accessTokenExpirationHour: 168
+
 

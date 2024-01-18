@@ -26,10 +26,10 @@ class Comments(
     @JoinColumn(name = "todo_id")
     val todo: Todos,
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    val user: Users
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    val user: Users
 
 ) : BaseTime() {
     @Id

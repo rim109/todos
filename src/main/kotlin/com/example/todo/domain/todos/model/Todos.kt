@@ -30,10 +30,10 @@ class Todos(
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     val comment: MutableList<Comments> = mutableListOf(),
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    val user: Users
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    val user: Users
 
 ) : BaseTime() {
     @Id
@@ -52,7 +52,6 @@ class Todos(
 fun Todos.toResponse(): TodosResponse {
     return TodosResponse(
         id = id!!,
-        userId = user.id!!,
         title = title,
         description = description,
         nickname = nickname,
