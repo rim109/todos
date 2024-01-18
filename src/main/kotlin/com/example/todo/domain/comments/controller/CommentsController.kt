@@ -8,6 +8,7 @@ import com.example.todo.domain.comments.dto.UpdateCommentsRequest
 import com.example.todo.domain.comments.service.CommentsService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
@@ -18,6 +19,7 @@ class CommentsController(
     private val commentsService: CommentsService,
 ) {
 
+    @PreAuthorize("hasRole('MYSELF')")
     @PostMapping
     fun createComments(
         @AuthenticationPrincipal user: CustomUser,
@@ -30,6 +32,7 @@ class CommentsController(
             .body(commentsService.createComments(todosId,createCommentsRequest, userId))
     }
 
+    @PreAuthorize("hasRole('MYSELF')")
     @PutMapping("/{commentsId}")
     fun updateComments(
         @AuthenticationPrincipal user: CustomUser,
@@ -43,6 +46,7 @@ class CommentsController(
             .body(commentsService.updateComments(todosId, commentsId, updateCommentsRequest, userId))
     }
 
+    @PreAuthorize("hasRole('MYSELF')")
     @DeleteMapping("/{commentsId}")
     fun deleteComments(
         @AuthenticationPrincipal user: CustomUser,

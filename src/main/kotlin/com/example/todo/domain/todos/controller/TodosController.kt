@@ -6,6 +6,7 @@ import com.example.todo.domain.todos.service.TodosService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
@@ -29,6 +30,7 @@ class TodosController(
             .body(todosService.getTodo(todoId))
     }
 
+    @PreAuthorize("hasRole('MYSELF')")
     @PostMapping
     fun createTodo(
         @AuthenticationPrincipal user: CustomUser,
@@ -41,6 +43,7 @@ class TodosController(
             .body(todosResponse)
     }
 
+    @PreAuthorize("hasRole('MYSELF')")
     @PutMapping("/{todoId}")
     fun updateTodos(
         @AuthenticationPrincipal user: CustomUser,
@@ -52,12 +55,14 @@ class TodosController(
             .body(todosService.updateTodo(todoId,userId,updateTodosRequest))
     }
 
+    @PreAuthorize("hasRole('MYSELF')")
     @PatchMapping("/{todoId}")
     fun completeStatus(@PathVariable todoId: Long): ResponseEntity<Unit> {
         return ResponseEntity.status(HttpStatus.OK).body(todosService.isCompleteStatus(todoId))
     }
 
 
+    @PreAuthorize("hasRole('MYSELF')")
     @DeleteMapping("/{todoId}")
     fun deleteTodos(
         @AuthenticationPrincipal user: CustomUser,

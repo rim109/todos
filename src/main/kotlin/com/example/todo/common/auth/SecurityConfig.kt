@@ -6,13 +6,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.access.AccessDeniedHandler
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val jwtTokenProvider: JwtTokenProvider
+    private val jwtTokenProvider: JwtTokenProvider,
+    private val accessDeniedHandler: AccessDeniedHandler
 ) {
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
@@ -24,13 +26,16 @@ class SecurityConfig(
             }
             .authorizeHttpRequests {
                 it.requestMatchers("/auth/signup", "/auth/login").anonymous()
-//                    .requestMatchers("/auth/info/**").hasRole("MEMBER")
+                    .requestMatchers("/auth/info/**").hasRole("MYSELF")
                     .anyRequest().permitAll()
             }
             .addFilterBefore(
                 JwtAuthenticationFilter(jwtTokenProvider),
                 UsernamePasswordAuthenticationFilter::class.java
             )
+            .exceptionHandling{
+                it.accessDeniedHandler(accessDeniedHandler)
+            }
         return http.build()
     }
 }
