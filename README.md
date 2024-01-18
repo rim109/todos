@@ -28,10 +28,10 @@ TODOLIST 백엔드 서버 만들기
 ![erd](/img/erd.png)
 
 ### API (글/댓글)
-![api](/img/api.png)
+![api](/img/api222.png)
 
 ### API (회원가입/로그인)
-![api](/img/api2.png)
+![api](/img/API.png)
 
 
 
