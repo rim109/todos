@@ -3,7 +3,10 @@ package com.example.todo.domain.comments.model
 import com.example.todo.common.model.BaseTime
 import com.example.todo.domain.comments.dto.CommentsResponse
 import com.example.todo.domain.todos.model.Todos
+import com.example.todo.domain.user.model.Users
 import jakarta.persistence.*
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 
 
 @Entity
@@ -19,9 +22,14 @@ class Comments(
     @Column(name = "password")
     var password: String,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "todo_id")
-    val todo: Todos
+    val todo: Todos,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    val user: Users
 
 ) : BaseTime() {
     @Id

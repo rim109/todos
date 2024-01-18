@@ -7,9 +7,9 @@ import com.example.todo.domain.comments.dto.UpdateCommentsRequest
 
 interface CommentsService {
 
-    fun createComments(todosId: Long, request: CreateCommentsRequest): CommentsResponse
+    fun createComments(todosId: Long, request: CreateCommentsRequest, userId: Long): CommentsResponse
 
-    fun updateComments(todosId: Long, commentsId: Long, request: UpdateCommentsRequest): CommentsResponse
+    fun updateComments(todosId: Long, commentsId: Long, request: UpdateCommentsRequest, userId: Long): CommentsResponse
 
-    fun deleteComments(todosId: Long, commentsId: Long, request: DeleteCommentsRequest)
+    fun deleteComments(todosId: Long, commentsId: Long, request: DeleteCommentsRequest, userId: Long)
 }

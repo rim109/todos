@@ -4,12 +4,14 @@ import com.example.todo.common.model.BaseTime
 import com.example.todo.domain.comments.model.Comments
 import com.example.todo.domain.comments.model.toResponse
 import com.example.todo.domain.todos.dto.TodosResponse
+import com.example.todo.domain.user.model.Users
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
-import java.util.*
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 
 @Entity
-@Table(name = "todos")
+@Table(name = "todo")
 class Todos(
 
     @Column(name = "title")
@@ -21,15 +23,17 @@ class Todos(
     @Column(name = "nickname")
     var nickname: String,
 
-    @Column(name = "day")
-    val day: Date,
-
     @Column(name = "complete")
     var complete: Boolean = false,
 
     @JsonIgnore
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
-    val comment: MutableList<Comments> = mutableListOf()
+    val comment: MutableList<Comments> = mutableListOf(),
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    val user: Users
 
 ) : BaseTime() {
     @Id
@@ -48,9 +52,9 @@ class Todos(
 fun Todos.toResponse(): TodosResponse {
     return TodosResponse(
         id = id!!,
+        userId = user.id!!,
         title = title,
         description = description,
-        day = day,
         nickname = nickname,
         complete = complete,
         comments = comment.map { it.toResponse() },
