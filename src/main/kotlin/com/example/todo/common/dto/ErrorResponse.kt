@@ -1,4 +1,4 @@
-package com.example.todo.domain.exception.dto
+package com.example.todo.common.dto
 
 data class ErrorResponse(
     val message: String?
