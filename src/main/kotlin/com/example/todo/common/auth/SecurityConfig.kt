@@ -26,7 +26,7 @@ class SecurityConfig(
             }
             .authorizeHttpRequests {
                 it.requestMatchers("/auth/signup", "/auth/login").anonymous()
-                    .requestMatchers("/auth/info/**").hasRole("MYSELF")
+                    .requestMatchers("/auth/info/**").hasRole("MINE")
                     .anyRequest().permitAll()
             }
             .addFilterBefore(

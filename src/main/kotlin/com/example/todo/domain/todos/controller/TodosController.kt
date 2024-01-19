@@ -30,7 +30,7 @@ class TodosController(
             .body(todosService.getTodo(todoId))
     }
 
-    @PreAuthorize("hasRole('MYSELF')")
+    @PreAuthorize("hasRole('MINE')")
     @PostMapping
     fun createTodo(
         @AuthenticationPrincipal user: CustomUser,
@@ -43,7 +43,7 @@ class TodosController(
             .body(todosResponse)
     }
 
-    @PreAuthorize("hasRole('MYSELF')")
+    @PreAuthorize("hasRole('MINE')")
     @PutMapping("/{todoId}")
     fun updateTodos(
         @AuthenticationPrincipal user: CustomUser,
@@ -55,14 +55,14 @@ class TodosController(
             .body(todosService.updateTodo(todoId,userId,updateTodosRequest))
     }
 
-    @PreAuthorize("hasRole('MYSELF')")
+    @PreAuthorize("hasRole('MINE')")
     @PatchMapping("/{todoId}")
     fun completeStatus(@PathVariable todoId: Long): ResponseEntity<Unit> {
         return ResponseEntity.status(HttpStatus.OK).body(todosService.isCompleteStatus(todoId))
     }
 
 
-    @PreAuthorize("hasRole('MYSELF')")
+    @PreAuthorize("hasRole('MINE')")
     @DeleteMapping("/{todoId}")
     fun deleteTodos(
         @AuthenticationPrincipal user: CustomUser,

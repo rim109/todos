@@ -19,7 +19,7 @@ class CommentsController(
     private val commentsService: CommentsService,
 ) {
 
-    @PreAuthorize("hasRole('MYSELF')")
+    @PreAuthorize("hasRole('MINE')")
     @PostMapping
     fun createComments(
         @AuthenticationPrincipal user: CustomUser,
@@ -32,7 +32,7 @@ class CommentsController(
             .body(commentsService.createComments(todosId,createCommentsRequest, userId))
     }
 
-    @PreAuthorize("hasRole('MYSELF')")
+    @PreAuthorize("hasRole('MINE')")
     @PutMapping("/{commentsId}")
     fun updateComments(
         @AuthenticationPrincipal user: CustomUser,
@@ -46,7 +46,7 @@ class CommentsController(
             .body(commentsService.updateComments(todosId, commentsId, updateCommentsRequest, userId))
     }
 
-    @PreAuthorize("hasRole('MYSELF')")
+    @PreAuthorize("hasRole('MINE')")
     @DeleteMapping("/{commentsId}")
     fun deleteComments(
         @AuthenticationPrincipal user: CustomUser,

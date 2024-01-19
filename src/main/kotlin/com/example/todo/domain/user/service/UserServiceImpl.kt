@@ -42,7 +42,7 @@ class UserServiceImpl(
         userRepository.save(user)
 
         //권한 저장
-        val userRole = UserRoleEntity(null, UserRole.MYSELF, user)
+        val userRole = UserRoleEntity(null, UserRole.MINE, user)
         userRoleRepository.save(userRole)
 
         return "회원가입 완료"
