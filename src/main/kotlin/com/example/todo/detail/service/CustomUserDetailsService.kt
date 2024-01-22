@@ -22,7 +22,6 @@ class CustomUserDetailsService(
 
     private fun createUserDetails(users: Users): UserDetails =
         CustomUser(
-            users.email,
             users.id!!,
             users.nickname,
             passwordEncoder.encode(users.password),

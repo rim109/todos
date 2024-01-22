@@ -4,7 +4,6 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.User
 
 class CustomUser(
-    val email: String,
     val id: Long,
     nickName: String,
     password: String,

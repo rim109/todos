@@ -13,7 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
 
-@RequestMapping("/comments/{todosId}")
+@RequestMapping("/todos/{todosId}/comments")
 @RestController
 class CommentsController(
     private val commentsService: CommentsService,
