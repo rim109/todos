@@ -1,6 +1,8 @@
 package com.example.todo.domain.user.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import jakarta.validation.constraints.Max
+import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 
@@ -20,12 +22,18 @@ data class SignupRequest(
     )
     @JsonProperty("password")
     private val _password: String?,
-    val nickname: String
-){
+
+    @field: NotBlank
+    @Min(6)
+    @Max(20)
+    private val _nickname: String
+) {
     val email: String
         get() = _email!!
     val password: String
         get() = _password!!
+    val nickname: String
+        get() = _nickname!!
 }
 
 

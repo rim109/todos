@@ -1,4 +1,4 @@
-package com.example.todo.common.service
+package com.example.todo.detail.service
 
 import com.example.todo.common.dto.CustomUser
 import com.example.todo.domain.user.model.Users
@@ -19,6 +19,7 @@ class CustomUserDetailsService(
         userRepository.findByEmail(email)
             ?.let { createUserDetails(it) }
             ?: throw UsernameNotFoundException("해당하는 유저를 찾을 수 없습니다.")
+
     private fun createUserDetails(users: Users): UserDetails =
         CustomUser(
             users.email,

@@ -1,8 +1,8 @@
 package com.example.todo.domain.user.service
 
 import com.example.todo.common.exception.InvalidInputException
-import com.example.todo.common.auth.JwtTokenProvider
-import com.example.todo.common.auth.TokenInfo
+import com.example.todo.auth.JwtTokenProvider
+import com.example.todo.auth.TokenInfo
 import com.example.todo.domain.user.dto.*
 import com.example.todo.domain.user.model.UserRole
 import com.example.todo.domain.user.model.UserRoleEntity

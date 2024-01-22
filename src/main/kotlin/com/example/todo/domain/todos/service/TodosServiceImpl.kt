@@ -27,7 +27,7 @@ class TodosServiceImpl(
 
     // 전체 todo 조회
     override fun getTodosList(): List<TodosResponse> {
-        return todoRepository.findAll(Sort.by(Sort.Direction.DESC,"createdAt")).map { it.toResponse() }
+        return todoRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt")).map { it.toResponse() }
     }
 
     // 선택된 todo 조회
@@ -42,7 +42,7 @@ class TodosServiceImpl(
 
     // todo 생성
     override fun createTodo(request: CreateTodosRequest, userId: Long): TodosResponse {
-        val user= userRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("User", userId)
+        val user = userRepository.findByIdOrNull(userId) ?: throw ModelNotFoundException("User", userId)
 //        if (user != null) {
 //            throw InvalidInputException("email", "이미 등록된 email 입니다.")
 //        }

@@ -1,4 +1,4 @@
-package com.example.todo.common.auth
+package com.example.todo.auth
 
 import com.example.todo.common.dto.CustomUser
 import io.jsonwebtoken.*

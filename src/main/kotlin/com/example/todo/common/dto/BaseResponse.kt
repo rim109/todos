@@ -1,6 +1,6 @@
 package com.example.todo.common.dto
 
-import com.example.todo.common.auth.ResultCode
+import com.example.todo.auth.ResultCode
 
 data class BaseResponse<T>(
     val resultCode: String = ResultCode.SUCCESS.name,

@@ -23,20 +23,20 @@ class CommentsController(
     @PostMapping
     fun createComments(
         @AuthenticationPrincipal user: CustomUser,
-        @PathVariable todosId:Long,
+        @PathVariable todosId: Long,
         @RequestBody createCommentsRequest: CreateCommentsRequest
     ): ResponseEntity<CommentsResponse> {
         val userId = user.id
         return ResponseEntity
             .status(HttpStatus.CREATED)
-            .body(commentsService.createComments(todosId,createCommentsRequest, userId))
+            .body(commentsService.createComments(todosId, createCommentsRequest, userId))
     }
 
     @PreAuthorize("hasRole('MINE')")
     @PutMapping("/{commentsId}")
     fun updateComments(
         @AuthenticationPrincipal user: CustomUser,
-        @PathVariable todosId:Long,
+        @PathVariable todosId: Long,
         @PathVariable commentsId: Long,
         updateCommentsRequest: UpdateCommentsRequest
     ): ResponseEntity<CommentsResponse> {
@@ -50,7 +50,7 @@ class CommentsController(
     @DeleteMapping("/{commentsId}")
     fun deleteComments(
         @AuthenticationPrincipal user: CustomUser,
-        @PathVariable todosId:Long,
+        @PathVariable todosId: Long,
         @PathVariable commentsId: Long, deleteCommentsRequest: DeleteCommentsRequest
     ): ResponseEntity<Unit> {
         val userId = user.id

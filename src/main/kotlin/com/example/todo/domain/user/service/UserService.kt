@@ -1,6 +1,6 @@
 package com.example.todo.domain.user.service
 
-import com.example.todo.common.auth.TokenInfo
+import com.example.todo.auth.TokenInfo
 import com.example.todo.domain.user.dto.*
 
 interface UserService {

@@ -1,4 +1,4 @@
-package com.example.todo.common.auth
+package com.example.todo.auth
 
 data class TokenInfo(
     val grantType: String,

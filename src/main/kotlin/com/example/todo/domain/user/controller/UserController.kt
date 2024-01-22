@@ -1,7 +1,7 @@
 package com.example.todo.domain.user.controller
 
 import com.example.todo.common.dto.BaseResponse
-import com.example.todo.common.auth.TokenInfo
+import com.example.todo.auth.TokenInfo
 import com.example.todo.domain.user.dto.*
 import com.example.todo.domain.user.service.UserService
 import jakarta.validation.Valid

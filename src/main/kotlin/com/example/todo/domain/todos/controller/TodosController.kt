@@ -24,7 +24,7 @@ class TodosController(
     }
 
     @GetMapping("/{todoId}")
-    fun getTodo(@PathVariable todoId: Long) : ResponseEntity<TodosResponse> {
+    fun getTodo(@PathVariable todoId: Long): ResponseEntity<TodosResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(todosService.getTodo(todoId))
@@ -52,7 +52,7 @@ class TodosController(
         val userId = user.id
         return ResponseEntity
             .status(HttpStatus.OK)
-            .body(todosService.updateTodo(todoId,userId,updateTodosRequest))
+            .body(todosService.updateTodo(todoId, userId, updateTodosRequest))
     }
 
     @PreAuthorize("hasRole('MINE')")
@@ -69,7 +69,7 @@ class TodosController(
         @PathVariable todoId: Long
     ): ResponseEntity<Unit> {
         val userId = user.id
-        todosService.deleteTodo(todoId,userId)
+        todosService.deleteTodo(todoId, userId)
         return ResponseEntity
             .status(HttpStatus.NO_CONTENT)
             .build()

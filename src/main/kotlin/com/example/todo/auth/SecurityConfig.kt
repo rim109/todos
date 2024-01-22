@@ -1,4 +1,4 @@
-package com.example.todo.common.auth
+package com.example.todo.auth
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -33,7 +33,7 @@ class SecurityConfig(
                 JwtAuthenticationFilter(jwtTokenProvider),
                 UsernamePasswordAuthenticationFilter::class.java
             )
-            .exceptionHandling{
+            .exceptionHandling {
                 it.accessDeniedHandler(accessDeniedHandler)
             }
         return http.build()

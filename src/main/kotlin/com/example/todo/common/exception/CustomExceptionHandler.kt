@@ -1,7 +1,7 @@
 package com.example.todo.common.exception
 
 import com.example.todo.common.dto.BaseResponse
-import com.example.todo.common.auth.ResultCode
+import com.example.todo.auth.ResultCode
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.BadCredentialsException
@@ -40,6 +40,9 @@ class CustomExceptionHandler {
     @ExceptionHandler(Exception::class)
     protected fun defaultException(ex: Exception): ResponseEntity<BaseResponse<Map<String, String>>> {
         val errors = mapOf("미처리 에러" to (ex.message ?: "Not Exception Message"))
-        return ResponseEntity(BaseResponse(ResultCode.ERROR.name, errors, ResultCode.ERROR.msg), HttpStatus.UNAUTHORIZED)
+        return ResponseEntity(
+            BaseResponse(ResultCode.ERROR.name, errors, ResultCode.ERROR.msg),
+            HttpStatus.UNAUTHORIZED
+        )
     }
 }
