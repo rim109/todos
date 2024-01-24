@@ -17,7 +17,7 @@ class UserController(
 ) {
 
     @PostMapping("/login")
-    fun signIn(@RequestBody loginRequest: LoginRequest): ResponseEntity<LoginResponse> {
+    fun signIn(@Valid @RequestBody loginRequest: LoginRequest): ResponseEntity<LoginResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(userService.login(loginRequest))
@@ -25,7 +25,7 @@ class UserController(
     }
 
     @PostMapping("/signup")
-    fun signup(@RequestBody signUpRequest: SignupRequest): ResponseEntity<UserResponse> {
+    fun signup(@Valid @RequestBody signUpRequest: SignupRequest): ResponseEntity<UserResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(userService.signup(signUpRequest))
